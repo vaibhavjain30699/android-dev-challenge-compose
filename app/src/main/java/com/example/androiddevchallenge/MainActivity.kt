@@ -42,7 +42,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun ComposeNavigation() {
 
-    val navController = rememberNavController();
+    val navController = rememberNavController()
 
     NavHost(
         navController = navController,
@@ -100,7 +99,7 @@ fun ComposeNavigation() {
 fun MyApp(names: List<String> = List(1000) { "Puppy $it" }, navController: NavController) {
 
     val pics: List<Int> =
-        listOf(R.mipmap.puppy_example1, R.mipmap.puppy_example2, R.mipmap.puppy_example3);
+        listOf(R.mipmap.puppy_example1, R.mipmap.puppy_example2, R.mipmap.puppy_example3)
 
     Surface(color = MaterialTheme.colors.background) {
         LazyColumn {
@@ -150,28 +149,7 @@ fun PuppyView(name: String, age: Int, resource: Int, navController: NavControlle
             )
             TextBox(label = "Age : $age yrs", modifier = Modifier.fillMaxWidth())
         }
-
     }
-
-//    Column (
-//        modifier = Modifier
-//            .padding(16.dp)
-//            .background(MaterialTheme.colors.background)
-//        ) {
-//        Image(
-//            painter = painterResource(id = R.mipmap.puppy_example),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .padding(4.dp)
-//                .height(150.dp)
-//                .fillMaxWidth()
-//                .clip(shape = RoundedCornerShape(8.dp)),
-//            contentScale = ContentScale.FillBounds
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        TextBox(label = name,modifier = Modifier.fillMaxWidth())
-////        TextBox(label = "2.5 yrs", modifier = Modifier.fillMaxWidth())
-//    }
 }
 
 @Composable
@@ -189,10 +167,10 @@ fun PuppyDetails(name: String, index: Int) {
 
 //    val pics : List<Int> = listOf(R.mipmap.puppy_example1,R.mipmap.puppy_example2,R.mipmap.puppy_example3);
 
-    var age: Int = 0;
-    if (index == R.mipmap.puppy_example1) age = 1;
-    else if (index == R.mipmap.puppy_example2) age = 2;
-    else age = 3;
+    var age: Int
+    if (index == R.mipmap.puppy_example1) age = 1
+    else if (index == R.mipmap.puppy_example2) age = 2
+    else age = 3
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -220,18 +198,18 @@ fun PuppyDetails(name: String, index: Int) {
     }
 }
 
-//@Preview("Light Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun LightPreview() {
+// @Preview("Light Theme", widthDp = 360, heightDp = 640)
+// @Composable
+// fun LightPreview() {
 //    MyTheme {
 //       ComposeNavigation()
 //    }
-//}
+// }
 
-//@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun DarkPreview() {
+// @Preview("Dark Theme", widthDp = 360, heightDp = 640)
+// @Composable
+// fun DarkPreview() {
 //    MyTheme(darkTheme = true) {
 //        MyApp()
 //    }
-//}
+// }
