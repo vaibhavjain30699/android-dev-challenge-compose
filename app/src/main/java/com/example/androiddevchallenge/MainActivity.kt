@@ -32,8 +32,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,8 +43,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -102,14 +106,24 @@ fun MyApp(names: List<String> = List(1000) { "Puppy $it" }, navController: NavCo
         listOf(R.mipmap.puppy_example1, R.mipmap.puppy_example2, R.mipmap.puppy_example3)
 
     Surface(color = MaterialTheme.colors.background) {
-        LazyColumn {
-            items(names.size) { index ->
-                PuppyView(
-                    name = names[index],
-                    age = ((index % 3) + 1),
-                    pics[index % 3],
-                    navController
+        Scaffold(topBar = {
+            TopAppBar(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "List of Puppies to Adopt",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 28.sp
                 )
+            }
+        }) {
+            LazyColumn {
+                items(names.size) { index ->
+                    PuppyView(
+                        name = names[index],
+                        age = ((index % 3) + 1),
+                        pics[index % 3],
+                        navController
+                    )
+                }
             }
         }
     }
