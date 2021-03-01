@@ -47,7 +47,7 @@ import com.example.androiddevchallenge.ui.theme.typography
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         setContent {
             MyTheme {
                 ComposeNavigation()
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun ComposeNavigation(){
+fun ComposeNavigation() {
 
     val navController = rememberNavController();
 
@@ -71,35 +71,45 @@ fun ComposeNavigation(){
         composable(
             "puppyDetails/{name}/{index}",
             arguments = listOf(
-                navArgument("name"){ type = NavType.StringType},
-                navArgument("index"){ type = NavType.IntType}
+                navArgument("name") { type = NavType.StringType },
+                navArgument("index") { type = NavType.IntType }
             )
         ) { backStackEntry ->
-            backStackEntry?.arguments?.getString("name")?.let { PuppyDetails(name = it,index = backStackEntry.arguments!!.getInt("index")) }
+            backStackEntry?.arguments?.getString("name")?.let {
+                PuppyDetails(
+                    name = it,
+                    index = backStackEntry.arguments!!.getInt("index")
+                )
+            }
         }
     }
-
 }
 
 // Start building your app here!
 @Composable
-fun MyApp(names : List<String> = List(1000){"Puppy $it"},navController: NavController) {
+fun MyApp(names: List<String> = List(1000) { "Puppy $it" }, navController: NavController) {
 
-    val pics : List<Int> = listOf(R.mipmap.puppy_example1,R.mipmap.puppy_example2,R.mipmap.puppy_example3);
+    val pics: List<Int> =
+        listOf(R.mipmap.puppy_example1, R.mipmap.puppy_example2, R.mipmap.puppy_example3);
 
     Surface(color = MaterialTheme.colors.background) {
         LazyColumn {
             items(names.size) { index ->
-                PuppyView(name = names[index],age = ((index%3)+1),pics[index%3],navController)
+                PuppyView(
+                    name = names[index],
+                    age = ((index % 3) + 1),
+                    pics[index % 3],
+                    navController
+                )
             }
         }
     }
 }
 
 @Composable
-fun PuppyView(name : String,age : Int,resource : Int,navController: NavController){
+fun PuppyView(name: String, age: Int, resource: Int, navController: NavController) {
 
-    Row (
+    Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .clickable {
@@ -109,9 +119,9 @@ fun PuppyView(name : String,age : Int,resource : Int,navController: NavControlle
             .height(125.dp)
             .padding(vertical = 4.dp)
             .background(Color.Blue.copy(alpha = 0.3f))
-    ){
+    ) {
         Image(
-            painter = painterResource(id = resource) ,
+            painter = painterResource(id = resource),
             contentDescription = null,
             modifier = Modifier
                 .padding(start = 10.dp)
@@ -155,7 +165,7 @@ fun PuppyView(name : String,age : Int,resource : Int,navController: NavControlle
 }
 
 @Composable
-fun TextBox(label: String, modifier: Modifier){
+fun TextBox(label: String, modifier: Modifier) {
     Text(
         text = label,
         style = typography.body1,
@@ -165,30 +175,30 @@ fun TextBox(label: String, modifier: Modifier){
 }
 
 @Composable
-fun PuppyDetails(name : String,index : Int) {
+fun PuppyDetails(name: String, index: Int) {
 
 //    val pics : List<Int> = listOf(R.mipmap.puppy_example1,R.mipmap.puppy_example2,R.mipmap.puppy_example3);
 
-    var age : Int = 0;
-    if(index == R.mipmap.puppy_example1) age = 1;
-    else if(index == R.mipmap.puppy_example2) age = 2;
+    var age: Int = 0;
+    if (index == R.mipmap.puppy_example1) age = 1;
+    else if (index == R.mipmap.puppy_example2) age = 2;
     else age = 3;
 
-    Column (
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id =index),
+            painter = painterResource(id = index),
             contentDescription = null,
             modifier = Modifier
                 .padding(8.dp)
                 .height(250.dp)
                 .fillMaxWidth(),
         )
-        Text(name,style = typography.h4)
+        Text(name, style = typography.h4)
         Spacer(modifier = Modifier.height(10.dp))
         Text(text = "Age : $age yrs")
         Spacer(modifier = Modifier.height(25.dp))
@@ -198,8 +208,6 @@ fun PuppyDetails(name : String,index : Int) {
             Text(text = "Adopt!")
         }
     }
-
-
 }
 
 //@Preview("Light Theme", widthDp = 360, heightDp = 640)
