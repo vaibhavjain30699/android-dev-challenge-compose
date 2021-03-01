@@ -106,15 +106,17 @@ fun MyApp(names: List<String> = List(1000) { "Puppy $it" }, navController: NavCo
         listOf(R.mipmap.puppy_example1, R.mipmap.puppy_example2, R.mipmap.puppy_example3)
 
     Surface(color = MaterialTheme.colors.background) {
-        Scaffold(topBar = {
-            TopAppBar(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = "List of Puppies to Adopt",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp
-                )
+        Scaffold(
+            topBar = {
+                TopAppBar(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = "List of Puppies to Adopt",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 28.sp
+                    )
+                }
             }
-        }) {
+        ) {
             LazyColumn {
                 items(names.size) { index ->
                     PuppyView(
